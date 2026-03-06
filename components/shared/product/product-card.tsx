@@ -7,24 +7,25 @@ import Rating from "./rating";
 
 const ProductCard = ({ product }: { product: Product }) => {
   return (
-    <Card className="w-full max-w-sm">
-      <CardHeader className="p-0 items-center">
-        <Link href={`/product/${product.slug}`}>
+    <Card className="w-full max-w-sm h-full overflow-hidden flex flex-col">
+      <CardHeader className="p-0">
+        <Link href={`/product/${product.slug}`} className="relative block aspect-square w-full">
           <Image
             src={product.images[0]}
             alt={product.name}
-            height={300}
-            width={300}
+            fill
+            className="object-cover"
+            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw"
             priority={true}
           />
         </Link>
       </CardHeader>
-      <CardContent className="p-4 grid gap-4">
+      <CardContent className="p-4 flex flex-1 flex-col gap-4">
         <div className="text-xs">{product.brand}</div>
-        <Link href={`/product/${product.slug}`}>
-          <h2 className="text-sm font-medium">{product.name}</h2>
+        <Link href={`/product/${product.slug}`} className="min-h-10">
+          <h2 className="text-sm font-medium leading-5">{product.name}</h2>
         </Link>
-        <div className="flex-between gap-4">
+        <div className="flex-between gap-4 mt-auto">
           <Rating value={Number(product.rating)} />
           {product.stock > 0 ? (
             <ProductPrice value={Number(product.price)} />

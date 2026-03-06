@@ -15,7 +15,7 @@ import Link from "next/link";
 const ProductCarousel = ({ data }: { data: Product[] }) => {
   return (
     <Carousel
-      className="w-full mb-12"
+      className="mb-12 w-screen max-w-none ml-[calc(50%-50vw)]"
       opts={{
         loop: true,
       }}
@@ -27,9 +27,9 @@ const ProductCarousel = ({ data }: { data: Product[] }) => {
         }),
       ]}
     >
-      <CarouselContent>
+      <CarouselContent className="-ml-0">
         {data.map((product) => (
-          <CarouselItem key={product.id}>
+          <CarouselItem key={product.id} className="pl-0">
             <Link href={`/product/${product.slug}`}>
               <div className="relative mx-auto">
                 <Image
@@ -48,8 +48,8 @@ const ProductCarousel = ({ data }: { data: Product[] }) => {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="left-4" />
+      <CarouselNext className="right-4" />
     </Carousel>
   );
 };
